@@ -1,0 +1,20 @@
+<h1>
+	Subscription Plan for: <%=@subscription_plan.newspaper.title%>
+</h1>
+<p>
+	<b>Details:</b>
+	<br>
+	Format: <%= @subscription_plan.weekly ? "Weekly" : "Daily" %>
+	<br>
+	Price: <%= @subscription_plan.price %>
+	<br>
+
+	<%= link_to "View Newspaper Page",
+		newspaper_path(@subscription_plan.newspaper_id)
+	%>
+	<br>
+	<%= link_to "Delete Plan Type",
+		subscription_plan_path(@subscription_plan),
+		:method => :delete
+	%>
+</p>

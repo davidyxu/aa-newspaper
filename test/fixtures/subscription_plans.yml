@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  price: 1
+  weekly: false
+  newspaper: 
+
+two:
+  price: 1
+  weekly: false
+  newspaper: 

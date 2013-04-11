@@ -1,0 +1,29 @@
+<h1>
+	<%= @newspaper.title%>
+</h1>
+<p>
+	Editor: <%= @newspaper.editor %>
+	<br>
+	<br>
+	<% if @newspaper.subscription_plans.empty? %>
+		No Available Subscription Plans
+	<% else %>
+		Available Subscription Plans:
+		<br>
+		<ol>
+			<% @newspaper.subscription_plans.each do |subscription_plan| %>
+				<li>
+					<%= render :partial => "/subscription_plans/display",
+						:locals => {:title => @newspaper.title,
+											  :subscription_plan => subscription_plan}
+					%>
+				</li>
+			<% end %>
+		</ol>
+	<%end %>
+	<br>
+	<br>
+	<%= link_to "Add Plan Type", plan_newspaper_path(@newspaper) %>
+</p>
+
+<%= link_to "Delete", newspaper_path(@newspaper), :method => :delete %>

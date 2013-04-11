@@ -1,0 +1,22 @@
+<h1>
+	Add Subscription Plan
+</h1>
+<%= form_for(@subscription_plan) do |f| %>
+	<% if @id %>
+		<%= f.hidden_field :newspaper_id, :value => @id %>
+	<% else %>
+		<%= f.label :newspaper_id, "Newspaper" %>
+		<%= f.collection_select :newspaper_id, Newspaper.all, :id, :title%>
+		<br>
+	<% end %>
+	<%= f.label :price %>
+	<%= f.text_field :price %>
+	<br>
+	<%= f.label :weekly, "Daily", :value => false %>
+	<%= f.radio_button :weekly, false, :checked => true %>
+	<br>
+	<%= f.label :weekly, "Weekly", :value => true %>
+	<%= f.radio_button :weekly, true %>
+	<br>
+	<%= f.submit "Add Plan" %>
+<% end %>

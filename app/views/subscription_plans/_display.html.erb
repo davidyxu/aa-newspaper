@@ -1,0 +1,10 @@
+<small>
+Format: <%= subscription_plan.weekly ? "Weekly" : "Daily" %>
+<br>
+Price: <%= subscription_plan.price %>
+<br>
+<%= link_to "View", subscription_plan_path(subscription_plan)%>
+ | 
+<%= link_to "Register", "#"%>
+<br>
+</small>

@@ -1,0 +1,49 @@
+<h1>Register</h1>
+<%= form_for(@user) do |f| %>
+
+	<%= f.label :email %>
+	<%= f.text_field :email %>
+	<br>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<br>
+
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+	<br>
+
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation %>
+	<br>
+
+	Available Subscriptions:
+	<br>
+	<% SubscriptionPlan.includes(:newspaper).all.each do |plan|%>
+		<input type="checkbox" name="user[subscriptions_attributes][][subscription_plan_id]" id="<%=plan.render_plan_name%>", value="<%=plan.id%>">
+		<label for="<%=plan.render_plan_name%>">
+			<%= plan.newspaper.title%>, <%=plan.render_plan_name%>
+		</label>
+		<br>
+	<% end %>
+	<br>
+	<%plans =  SubscriptionPlan.includes(:newspaper).all %>
+	<% Newspaper.all.each do |newspaper| %>
+		<%relevant_plans = plans.select {|plan| plan.newspaper_id == newspaper.id }%>
+		<% next if relevant_plans.empty?%>
+		<select name="user[subscriptions_attributes][][subscription_plan_id]"
+						id="<%=newspaper.id%>">
+			<%=options_from_collection_for_select(
+				relevant_plans,
+				:id,
+				:render_plan_name
+				)
+			%>
+		</select>
+		<label for="<%=newspaper.id%>"><%=newspaper.title%></label>
+		<br>
+	<%end%>
+
+	
+	<%= f.submit "Register" %>
+<% end %>
